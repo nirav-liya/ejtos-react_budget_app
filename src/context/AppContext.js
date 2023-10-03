@@ -134,11 +134,12 @@ export const AppProvider = (props) => {
     const totalExpenses = state.expenses.reduce((total, item) => {
         return (total = total + (item.unitprice*item.quantity));
     }, 0);
-    const totalBudgetSpent = state.expenses.reduce((total, item) => {
-        return (total = total + (item.unitprice*item.quantity));
+    const totalBudgetSpent = state.budgets.reduce((total, item) => {
+        return (total = total + item.quantity);
     }, 0);
 
 state.CartValue = totalExpenses;
+state.Spend = totalBudgetSpent;
 
     return (
         <AppContext.Provider

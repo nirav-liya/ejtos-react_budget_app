@@ -18,12 +18,12 @@ const BudgetAllocate = (props) => {
 
         if(action === "Reduce") {
             dispatch({
-                type: 'RED_QUANTITY',
+                type: 'RED_BUDGET',
                 payload: item,
             });
         } else {
                 dispatch({
-                    type: 'ADD_QUANTITY',
+                    type: 'ADD_BUDGET',
                     payload: item,
                 });
             }
@@ -59,7 +59,7 @@ const BudgetAllocate = (props) => {
                     <input
                         required='required'
                         type='number'
-                        id='cost'
+                        id='budgetAmount'
                         value={quantity}
                         style={{size: 10}}
                         onChange={(event) => setQuantity(event.target.value)}>
