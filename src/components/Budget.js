@@ -1,8 +1,8 @@
-import React, { useContext } from 'react';
+import React, { useContext,useState } from 'react';
 import { AppContext } from '../context/AppContext';
 
-const BudgetValue = () => {
-    const { expenses, Location } = useContext(AppContext);
+const Budget = () => {
+    const { expenses, Currency } = useContext(AppContext);
     const totalExpenses = expenses.reduce((total, item) => {
         return (total += (item.unitprice * item.quantity));
     }, 0);
@@ -11,7 +11,7 @@ const BudgetValue = () => {
 
     return (
         <div className='alert alert-primary'>
-            <span>Budget : {Location}
+            <span>Budget : {Currency}
             <input
                         required='required'
                         type='number'
@@ -25,4 +25,4 @@ const BudgetValue = () => {
     );
 };
 
-export default BudgetValue;
+export default Budget;
