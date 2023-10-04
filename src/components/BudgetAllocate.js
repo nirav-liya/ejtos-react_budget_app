@@ -19,6 +19,7 @@ const BudgetAllocate = (props) => {
         if (quantity>totalBudgetRemaining)
         {
             alert('Value can not exceed remaining funds '+Currency+totalBudgetRemaining);
+            return;
         }
         const item = {
             name: name,
