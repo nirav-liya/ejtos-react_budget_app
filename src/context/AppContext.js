@@ -54,6 +54,12 @@ export const AppReducer = (state, action) => {
             return {
                 ...state
             }
+    case 'CHG_TOTALBUDGET':
+        action.type = "DONE";
+        state.totalBudget = action.payload;
+        return {
+            ...state
+        }
     case 'ADD_QUANTITY':
                 let updatedqty = false;
                 state.expenses.map((expense)=>{
@@ -119,7 +125,8 @@ const initialState = {
         { id: "Human Resource", name: 'Human Resource', quantity: 0},
         { id: "IT", name: 'IT', quantity: 0},
     ],
-    Currency: '$'
+    Currency: '$',
+    totalBudget: 0
 };
 
 // 2. Creates the context this is the thing our components import and use to get the state
@@ -135,22 +142,20 @@ export const AppProvider = (props) => {
         return (total = total + (item.unitprice*item.quantity));
     }, 0);
 
-    const totalBudget = state.budgets.reduce((total, item) => {
-        return total;
-    }, 0);
+   
 
     const totalBudgetSpent = state.budgets.reduce((total, item) => {
         return (total = total + item.quantity);
     }, 0);
 
     const totalBudgetRemaining = state.budgets.reduce((total, item) => {
-        return (total = total - item.quantity);
+        return (total = total + item.quantity);
     }, 0);
 
 state.CartValue = totalExpenses;
 state.Spend = totalBudgetSpent;
 state.Remaining = totalBudgetRemaining;
-state.budget = totalBudget;
+
     return (
         <AppContext.Provider
             value={{
@@ -158,7 +163,8 @@ state.budget = totalBudget;
                 budgets: state.budgets,
                 CartValue: state.CartValue,
                 dispatch,
-                Currency: state.Currency
+                Currency: state.Currency,
+                totalBudget: state.totalBudget
             }}
         >
             {props.children}

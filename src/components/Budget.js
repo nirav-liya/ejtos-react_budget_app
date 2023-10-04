@@ -1,13 +1,15 @@
 import React, { useContext,useState } from 'react';
 import { AppContext } from '../context/AppContext';
 
-const Budget = () => {
-    const { budgets, Currency } = useContext(AppContext);
-    const totalBudget = budgets.reduce((total, item) => {
-        return total;
-    }, 0);
-    
+const Budget = (props) => {
+    const { dispatch, totalBudget, Currency } = useContext(AppContext);
     const [budget, setBudget] = useState('');
+    const changeTotalBudget = (val)=>{
+        dispatch({
+            type: 'CHG_TOTALBUDGET',
+            payload: val,
+        })
+}
 
     return (
         <div className='alert alert-primary'>
@@ -16,9 +18,9 @@ const Budget = () => {
                         required='required'
                         type='number'
                         id='budget'
-                        value={budget}
+                        
                         style={{size: 6}}
-                        onChange={(event) => setBudget(event.target.value)}>
+                        onChange={(event) => changeTotalBudget(event.target.value)}>
                         </input>
             </span>
         </div>
