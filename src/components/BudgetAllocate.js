@@ -2,7 +2,8 @@ import React, { useContext, useState } from 'react';
 import { AppContext } from '../context/AppContext';
 
 const BudgetAllocate = (props) => {
-    const { dispatch,Currency} = useContext(AppContext);
+    const { dispatch,budgets, totalBudget,Currency} = useContext(AppContext);
+    
 
     const [name, setName] = useState('');
     const [quantity, setQuantity] = useState('');
@@ -10,7 +11,15 @@ const BudgetAllocate = (props) => {
     
 
     const submitEvent = () => {
+        const totalBudgetSpend = budgets.reduce((total, item) => {
+            return (total += item.quantity);
+        }, 0);
+        const totalBudgetRemaining = totalBudget-totalBudgetSpend;
 
+        if (quantity>totalBudgetRemaining)
+        {
+            alert('Value can not exceed remaining funds '+Currency+totalBudgetRemaining);
+        }
         const item = {
             name: name,
             quantity: parseInt(quantity),
