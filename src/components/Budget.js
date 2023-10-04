@@ -9,7 +9,7 @@ const Budget = (props) => {
             return (total += item.quantity);
         }, 0);
         
-        if (parseInt(val)>100)
+        if (parseInt(val)>20000)
         {
             alert('Budget Value can not exceed 20,000');
             return;
